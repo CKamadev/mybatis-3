@@ -13,6 +13,9 @@
 --    See the License for the specific language governing permissions and
 --    limitations under the License.
 --
+--    用于单元测试里,初始化数据库数据
+--    创建subject表,并初始化三条数据
+--    创建extensive_subject表,并初始化三条数据
 
 DROP TABLE subject
 IF EXISTS;

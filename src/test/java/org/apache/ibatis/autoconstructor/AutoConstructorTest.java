@@ -31,23 +31,29 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * 单元测试类
+ */
 public class AutoConstructorTest {
   private static SqlSessionFactory sqlSessionFactory;
 
   @BeforeAll
   public static void setUp() throws Exception {
     // create a SqlSessionFactory
+    // 创建SqlSeesionFactory对象,基于mybatis-config.xml文件
     try (Reader reader = Resources.getResourceAsReader("org/apache/ibatis/autoconstructor/mybatis-config.xml")) {
       sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
     }
 
     // populate in-memory database
+    // 初始化数据到内存数据库,基于CreateDB.sql文件
     BaseDataTest.runScript(sqlSessionFactory.getConfiguration().getEnvironment().getDataSource(),
         "org/apache/ibatis/autoconstructor/CreateDB.sql");
   }
 
   @Test
   public void fullyPopulatedSubject() {
+    // JAVA7特性, 把需要释放的资源写在try后面的括号, 需要资源类实现了java.lang.AutoCloseable 接口
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       final AutoConstructorMapper mapper = sqlSession.getMapper(AutoConstructorMapper.class);
       final Object subject = mapper.getSubject(1);

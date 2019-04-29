@@ -15,6 +15,9 @@
  */
 package org.apache.ibatis.autoconstructor;
 
+/**
+ * 对应subject表
+ */
 public class BadSubject {
   private final int id;
   private final String name;
@@ -22,6 +25,9 @@ public class BadSubject {
   private final Height height;
   private final Double weight;
 
+  /**
+   * height 参数的类型是 Height ，而不是 Integer 。因为 MyBatis 无法识别 Height 类，所以会创建 BadSubject 对象报错
+   */
   public BadSubject(final int id, final String name, final int age, final Height height, final Double weight) {
     this.id = id;
     this.name = name;

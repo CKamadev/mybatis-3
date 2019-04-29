@@ -15,6 +15,10 @@
  */
 package org.apache.ibatis.autoconstructor;
 
+/**
+ * 对应extensive_subject表
+ * 涵盖各种类型的数据
+ */
 public class ExtensiveSubject {
     private final byte aByte;
     private final short aShort;

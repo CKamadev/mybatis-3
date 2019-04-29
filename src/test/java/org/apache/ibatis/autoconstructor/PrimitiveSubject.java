@@ -17,6 +17,9 @@ package org.apache.ibatis.autoconstructor;
 
 import java.util.Date;
 
+/**
+ * 对应subject表
+ */
 public class PrimitiveSubject {
   private final int id;
   private final String name;
@@ -26,6 +29,9 @@ public class PrimitiveSubject {
   private final boolean active;
   private final Date dt;
 
+  /**
+   * 当height和weight为null时会报错
+   */
   public PrimitiveSubject(final int id, final String name, final int age, final int height, final int weight, final boolean active, final Date dt) {
     this.id = id;
     this.name = name;
