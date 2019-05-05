@@ -26,6 +26,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Offline entity resolver for the MyBatis DTDs
+ * 用于加载本地的mybatis-3-config.dtd和mybatis-3-mapper.dtd文件
  *
  * @author Clinton Begin
  * @author Eduardo Macarron
@@ -55,8 +56,10 @@ public class XMLMapperEntityResolver implements EntityResolver {
       if (systemId != null) {
         String lowerCaseSystemId = systemId.toLowerCase(Locale.ENGLISH);
         if (lowerCaseSystemId.contains(MYBATIS_CONFIG_SYSTEM) || lowerCaseSystemId.contains(IBATIS_CONFIG_SYSTEM)) {
+          // 本地mybatis-config.dtd文件
           return getInputSource(MYBATIS_CONFIG_DTD, publicId, systemId);
         } else if (lowerCaseSystemId.contains(MYBATIS_MAPPER_SYSTEM) || lowerCaseSystemId.contains(IBATIS_MAPPER_SYSTEM)) {
+          // 本地mybatis-mapper.dtd文件
           return getInputSource(MYBATIS_MAPPER_DTD, publicId, systemId);
         }
       }
@@ -70,8 +73,10 @@ public class XMLMapperEntityResolver implements EntityResolver {
     InputSource source = null;
     if (path != null) {
       try {
+        // 创建InputSource对象
         InputStream in = Resources.getResourceAsStream(path);
         source = new InputSource(in);
+        // 设置publicId,systemId属性
         source.setPublicId(publicId);
         source.setSystemId(systemId);
       } catch (IOException e) {
